@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net8.0/publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/a09acd10-883c-465d-b181-5c4baf6d2d0f/resourceGroups/CvsProcessing/providers/Microsoft.Web/sites/CvsProcessingWeb"
+}

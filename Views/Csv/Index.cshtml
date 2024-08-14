@@ -1,0 +1,212 @@
+@model SearchDataCollection.Models.Filter // Ajusta el modelo según tu estructura
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.css">
+
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h2>Csv Data List</h2>
+    <a class="btn btn-primary" asp-area="" asp-controller="Csv" asp-action="UploadCvsFile">Upload Csv File</a>
+</div>
+
+<div class="row mb-2">
+    <form>
+        <div class="row">
+            <div class="col-3">
+                <label for="personalZip">Código Postal:</label>
+                <input type="text" class="form-control" id="personalZip" name="personalZip" value="@Model.PersonalZip">
+            </div>
+            <div class="col-3">
+                <label for="county">Condado:</label>
+                <input type="text" class="form-control" id="county" name="county" value="@Model.County">
+            </div>
+            <div class="col-3">
+                <label for="searchTerm">Término de Búsqueda:</label>
+                <select asp-for="@Model.SearchTerm" class="form-control" id="searchTerm" name="searchTerm">
+                    <option value=""></option>
+                    @foreach (var searchTerm in Model.listOfSearchTerms)
+                    {
+                        <option value="@searchTerm">@searchTerm</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <label for="startDate">Fecha de Inicio:</label>
+                <input type="date" class="form-control" id="startDate" name="startDate">
+            </div>
+            <div class="col-3">
+                <label for="endDate">Fecha de Fin:</label>
+                <input type="date" class="form-control" id="endDate" name="endDate">
+            </div>
+            <div class="col-3">
+                <button type="button" id="filterBtn" class="btn btn-primary mt-4">Buscar</button>
+                <button type="button" id="downloadBtn" class="btn btn-info mt-4 ml-2">Descargar CSV</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col">
+        <table id="searchTermsTable" data-url="@Url.Action("GetSearchTerms", "Csv")">
+            <thead>
+                <tr>
+                    <th data-field="year">Year</th>
+                    <th data-field="search_Term">Search Term</th>
+                    <th data-field="firsT_NAME">First Name</th>
+                    <th data-field="lasT_NAME">Last Name</th>
+                    <th data-field="direcT_NUMBER">Direct Number</th>
+                    <th data-field="mobilE_PHONE">Mobile Phone</th>
+                    <th data-field="personaL_ADDRESS">Personal Address</th>
+                    <th data-field="personaL_CITY">Personal City</th>
+                    <th data-field="personaL_PHONE">Personal Phone</th>
+                    <th data-field="personaL_STATE">Personal State</th>
+                    <th data-field="personaL_ZIP">Personal Zip</th>
+                    <th data-field="personaL_ZIP4">Personal Zip4</th>
+                    <th data-field="sociaL_CONNECTIONS">Social Connections</th>
+                    <th data-field="agE_RANGE">Age Range</th>
+                    <th data-field="children">Children</th>
+                    <th data-field="gender">Gender</th>
+                    <th data-field="homeowner">Homeowner</th>
+                    <th data-field="married">Married</th>
+                    <th data-field="neT_WORTH">Net Worth</th>
+                    <th data-field="incomE_RANGE">Income Range</th>
+                    <th data-field="businesS_EMAIL">Business Email</th>
+                    <th data-field="businesS_EMAIL_VALIDATION_STATUS">Business Email Validation Status</th>
+                    <th data-field="programmatiC_BUSINESS_EMAILS">Programmatic Business Emails</th>
+                    <th data-field="businesS_EMAIL_LAST_SEEN">Business Email Last Seen</th>
+                    <th data-field="personaL_EMAIL">Personal Email</th>
+                    <th data-field="additionaL_PERSONAL_EMAILS">Additional Personal Emails</th>
+                    <th data-field="personaL_EMAIL_VALIDATION_STATUS">Personal Email Validation Status</th>
+                    <th data-field="personaL_EMAIL_LAST_SEEN">Personal Email Last Seen</th>
+                    <th data-field="shA256_PERSONAL_EMAIL">SHA256 Personal Email</th>
+                    <th data-field="shA256_BUSINESS_EMAIL">SHA256 Business Email</th>
+                    <th data-field="lasT_UPDATED">Last Updated</th>
+                    <th data-field="companY_ADDRESS">Company Address</th>
+                    <th data-field="companY_DESCRIPTION">Company Description</th>
+                    <th data-field="companY_DOMAIN">Company Domain</th>
+                    <th data-field="companY_EMPLOYEE_COUNT">Company Employee Count</th>
+                    <th data-field="companY_LINKEDIN_URL">Company LinkedIn URL</th>
+                    <th data-field="companY_NAME">Company Name</th>
+                    <th data-field="companY_PHONE">Company Phone</th>
+                    <th data-field="companY_REVENUE">Company Revenue</th>
+                    <th data-field="companY_SIC">Company SIC</th>
+                    <th data-field="companY_NAICS">Company NAICS</th>
+                    <th data-field="companY_CITY">Company City</th>
+                    <th data-field="companY_STATE">Company State</th>
+                    <th data-field="companY_ZIP">Company Zip</th>
+                    <th data-field="companY_INDUSTRY">Company Industry</th>
+                    <th data-field="companY_LAST_UPDATED">Company Last Updated</th>
+                    <th data-field="department">Department</th>
+                    <th data-field="joB_TITLE">Job Title</th>
+                    <th data-field="linkediN_URL">LinkedIn URL</th>
+                    <th data-field="professionaL_ADDRESS">Professional Address</th>
+                    <th data-field="professionaL_ADDRESS_2">Professional Address 2</th>
+                    <th data-field="professionaL_CITY">Professional City</th>
+                    <th data-field="professionaL_STATE">Professional State</th>
+                    <th data-field="professionaL_ZIP">Professional Zip</th>
+                    <th data-field="professionaL_ZIP4">Professional Zip4</th>
+                    <th data-field="senioritY_LEVEL">Seniority Level</th>
+                    <th data-field="joB_TITLE_LAST_UPDATED">Job Title Last Updated</th>
+                    <th data-field="skiptracE_MATCH_BY">Skiptrace Match By</th>
+                    <th data-field="skiptracE_HASH">Skiptrace Hash</th>
+                    <th data-field="skiptracE_FIRST_NAME">Skiptrace First Name</th>
+                    <th data-field="skiptracE_LAST_NAME">Skiptrace Last Name</th>
+                    <th data-field="skiptracE_ADDRESS">Skiptrace Address</th>
+                    <th data-field="skiptracE_CITY">Skiptrace City</th>
+                    <th data-field="skiptracE_STATE">Skiptrace State</th>
+                    <th data-field="skiptracE_ZIP">Skiptrace Zip</th>
+                    <th data-field="skiptracE_LANDLINE_NUMBERS">Skiptrace Landline Numbers</th>
+                    <th data-field="skiptracE_WIRELESS_NUMBERS">Skiptrace Wireless Numbers</th>
+                    <th data-field="zipCode">Zip Code</th>
+                    <th data-field="primaryCBSA">Primary CBSA</th>
+                    <th data-field="primaryCBSAName">Primary CBSA Name</th>
+                    <th data-field="cbsaType">CBSA Type</th>
+                    <th data-field="primaryCSA">Primary CSA</th>
+                    <th data-field="primaryCSAName">Primary CSA Name</th>
+                    <th data-field="city">City</th>
+                    <th data-field="state">State</th>
+                    <th data-field="cbsaPrimaryCity">CBSA Primary City</th>
+                    <th data-field="primaryCountyName">Primary County Name</th>
+                    <th data-field="primaryCountyFIPSID">Primary County FIPS ID</th>
+                    <th data-field="zctaPopulation">ZCTA Population</th>
+                    <th data-field="withinMultipleCBSAs">Within Multiple CBSAs</th>
+                    <th data-field="secondaryCBSA1">Secondary CBSA1</th>
+                    <th data-field="secondaryCBSA2">Secondary CBSA2</th>
+                    <th data-field="secondaryCBSA1Name">Secondary CBSA1 Name</th>
+                    <th data-field="secondaryCBSA2Name">Secondary CBSA2 Name</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            function descargarCSV() {
+                // Obtener los valores de los campos
+                var personalZip = $('#personalZip').val();
+                var county = $('#county').val();
+                var searchTerm = $('#searchTerm').val();
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+
+                // Construir la URL con los parámetros
+                var url = '/Cvs/DownloadCsv?personalZip=' + personalZip +
+                    '&county=' + county +
+                    '&searchTerm=' + searchTerm +
+                    '&dateStart=' + startDate +
+                    '&endDate=' + endDate;
+
+                // Crear un nuevo elemento de ancla y establecer sus atributos
+                var link = document.createElement('a');
+                link.href = url;
+                link.target = '_blank'; // Abrir en una nueva pestaña
+
+                // Simular un clic en el enlace
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            $('#searchTermsTable').bootstrapTable({
+                rowHeight: 50,
+                method: 'get', // O 'get' según tu configuración
+                url: '@Url.Action("GetSearchTerms", "Csv")',
+                pagination: true,
+                search: true,
+                pageSize: 10,
+                totalField: 'total',
+                sidePagination: 'server', // Indica paginación del lado del servidor
+                queryParams: function (params) {
+                    var personalZip = $('#personalZip').val();
+                    var county = $('#county').val();
+                    var searchTerm = $('#searchTerm').val();
+                    var dateStart = $('#startDate').val();
+                    var dateEnd = $('#endDate').val();
+
+                    return {
+                        limit: params.limit,
+                        offset: params.offset,
+                        search: params.search,
+                        personalZip: personalZip,
+                        county: county,
+                        searchTerm: searchTerm,
+                        dateStart: dateStart,
+                        dateEnd: dateEnd
+                    };
+                }
+            });
+
+            $('#filterBtn').click(function () {
+                $('#searchTermsTable').bootstrapTable('refresh');
+            });
+
+            $('#downloadBtn').click(function () {
+                descargarCSV();
+            });
+        });
+    </script>
+}
